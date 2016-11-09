@@ -1,5 +1,5 @@
 {
-  "name": "pimax/fb-messenger-php",
+  "name": "meritocracy/fb-messenger-php",
   "description": " Facebook Messenger Bot PHP API",
   "homepage": "https://github.com/pimax/fb-messenger-php",
   "license": "MIT",
@@ -12,7 +12,8 @@
     }
   ],
   "require": {
-    "php": ">=5.4.0"
+    "php": ">=5.4.0",
+    "guzzlehttp/guzzle": "~6.0"
   },
 
   "autoload": {
