@@ -1,13 +1,12 @@
 {
   "name": "meritocracy/fb-messenger-php",
   "description": " Facebook Messenger Bot PHP API",
-  "homepage": "https://github.com/pimax/fb-messenger-php",
+  "homepage": "https://github.com/Meritocracy-git/fb-messenger-php",
   "license": "MIT",
   "authors": [
     {
-      "name": "Max Pinyugin",
-      "email": "m.pinyugin@gmail.com",
-      "homepage": "http://russian-developers.com",
+      "name": "Christian Cannata",
+      "email": "christian1488@hotmail.it",
       "role": "Developer"
     }
   ],
