@@ -11,9 +11,9 @@ INSTALLATION
 ------------
 
 ```
-composer require "pimax/fb-messenger-php" "dev-master"
+composer require "meritocracy/fb-messenger-php" "dev-master"
 ```
 
 BASIC USAGE
 ------------
-See this repo - [https://github.com/pimax/fb-messenger-php-example](https://github.com/pimax/fb-messenger-php-example)
+See this repo - [https://github.com/Meritocracy-git/fb-messenger-php](https://github.com/Meritocracy-git/fb-messenger-php)
