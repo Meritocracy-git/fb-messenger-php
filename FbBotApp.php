@@ -2,6 +2,7 @@
 
 namespace pimax;
 
+use GuzzleHttp\Client;
 use pimax\Messages\Message;
 use pimax\Messages\MessageButton;
 
@@ -11,7 +12,7 @@ class FbBotApp
      * Request type GET
      */
     const TYPE_GET = "get";
-    
+
     /**
      * Request type POST
      */
@@ -21,14 +22,14 @@ class FbBotApp
      * Request type DELETE
      */
     const TYPE_DELETE = "delete";
-    
+
     /**
      * FB Messenger API Url
      *
      * @var string
      */
     protected $apiUrl = 'https://graph.facebook.com/v2.6/';
-    
+
     /**
      * @var null|string
      */
@@ -114,34 +115,32 @@ class FbBotApp
      */
     protected function call($url, $data, $type = self::TYPE_POST)
     {
-        $data['access_token'] = $this->token;
+
 
         $headers = [
             'Content-Type: application/json',
         ];
 
+        $method="POST";
+
         if ($type == self::TYPE_GET) {
             $url .= '?'.http_build_query($data);
+            $method="GET";
         }
 
-        $process = curl_init($this->apiUrl.$url);
-        curl_setopt($process, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($process, CURLOPT_HEADER, false);
-        curl_setopt($process, CURLOPT_TIMEOUT, 30);
-        
-        if($type == self::TYPE_POST || $type == self::TYPE_DELETE) {
-            curl_setopt($process, CURLOPT_POST, 1);
-            curl_setopt($process, CURLOPT_POSTFIELDS, http_build_query($data));
-        }
 
         if ($type == self::TYPE_DELETE) {
-            curl_setopt($process, CURLOPT_CUSTOMREQUEST, "DELETE");
+            $method="DELETE";
         }
 
-        curl_setopt($process, CURLOPT_RETURNTRANSFER, true);
-        $return = curl_exec($process);
-        curl_close($process);
+        $client=new Client();
+        $data['access_token'] = $this->token;
 
-        return json_decode($return, true);
+        $response=$client->request($method,$this->apiUrl.$url,["form_params"=>$data,"headers"=>$headers]);
+
+        die(Var_dump($response->getContent()->getBody()));
+
+
+        return json_decode($respose->getContent()->getBody()    , true);
     }
 }
