@@ -58,7 +58,7 @@ class FbBotApp
     /**
      * Get User Profile Info
      *
-     * @param int    $id
+     * @param int $id
      * @param string $fields
      * @return UserProfile
      */
@@ -109,11 +109,11 @@ class FbBotApp
      * Request to API
      *
      * @param string $url
-     * @param array  $data
+     * @param array $data
      * @param string $type Type of request (GET|POST|DELETE)
      * @return array
      */
-    protected function call($url, $data, $type = self::TYPE_POST)
+    public function call($url, $data, $type = self::TYPE_POST)
     {
 
 
@@ -121,26 +121,24 @@ class FbBotApp
             'Content-Type: application/json',
         ];
 
-        $method="POST";
+        $method = "POST";
 
         if ($type == self::TYPE_GET) {
-            $url .= '?'.http_build_query($data);
-            $method="GET";
+            $url .= '?' . http_build_query($data);
+            $method = "GET";
         }
 
 
         if ($type == self::TYPE_DELETE) {
-            $method="DELETE";
+            $method = "DELETE";
         }
 
-        $client=new Client();
+        $client = new Client();
         $data['access_token'] = $this->token;
 
-        $response=$client->request($method,$this->apiUrl.$url,["form_params"=>$data,"headers"=>$headers]);
-
-        die(Var_dump($response->getContent()->getBody()));
+        $response = $client->request($method, $this->apiUrl . $url, ["form_params" => $data, "headers" => $headers]);
 
 
-        return json_decode($respose->getContent()->getBody()    , true);
+        return json_decode($response->getContent()->getBody(), true);
     }
 }
