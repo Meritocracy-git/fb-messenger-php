@@ -123,6 +123,10 @@ class StructuredMessage extends Message
                 $this->elements = $data['elements'];
             break;
 
+            case self::TYPE_LIST:
+                $this->elements = $data['elements'];
+                break;
+
             case self::TYPE_RECEIPT:
                 $this->recipient_name = $data['recipient_name'];
                 $this->order_number = $data['order_number'];
@@ -167,6 +171,7 @@ class StructuredMessage extends Message
             break;
 
             case self::TYPE_GENERIC:
+            case self::TYPE_LIST:
                 $result['attachment']['payload']['elements'] = [];
 
                 foreach ($this->elements as $btn) {

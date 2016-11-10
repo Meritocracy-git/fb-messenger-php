@@ -5,6 +5,7 @@ namespace meritocracy;
 use GuzzleHttp\Client;
 use meritocracy\Messages\Message;
 use meritocracy\Messages\MessageButton;
+use meritocracy\UserProfile;
 
 class FbBotApp
 {
@@ -136,8 +137,14 @@ class FbBotApp
         $client = new Client();
         $data['access_token'] = $this->token;
 
-        $response = $client->request($method, $this->apiUrl . $url, ["form_params" => $data, "headers" => $headers]);
 
+
+        try {
+            $response = $client->request($method, $this->apiUrl . $url, ["form_params" => $data, "headers" => $headers]);
+
+        } catch (\Exception $e) {
+            die(var_dump($e->getMessage()));
+        }
 
         return json_decode($response->getBody()->getContents(), true);
     }
