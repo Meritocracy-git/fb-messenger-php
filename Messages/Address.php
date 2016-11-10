@@ -1,11 +1,11 @@
 <?php
 
-namespace pimax\Messages;
+namespace meritocracy\Messages;
 
 /**
  * Class Address
  * 
- * @package pimax\Messages
+ * @package meritocracy\Messages
  */
 class Address
 {

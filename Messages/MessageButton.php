@@ -1,10 +1,10 @@
 <?php
 
-namespace pimax\Messages;
+namespace meritocracy\Messages;
 
 /**
  * Class MessageButton
- * @package pimax\Messages
+ * @package meritocracy\Messages
  */
 class MessageButton
 {

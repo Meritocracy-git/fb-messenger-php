@@ -1,11 +1,11 @@
 <?php
 
-namespace pimax\Messages;
+namespace meritocracy\Messages;
 
 /**
  * Class Summary
  *
- * @package pimax\Messages
+ * @package meritocracy\Messages
  */
 class Summary
 {

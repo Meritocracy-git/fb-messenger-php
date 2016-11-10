@@ -1,11 +1,11 @@
 <?php
 
-namespace pimax\Messages;
+namespace meritocracy\Messages;
 
 /**
  * Class Adjustment
  *
- * @package pimax\Messages
+ * @package meritocracy\Messages
  */
 class Adjustment
 {

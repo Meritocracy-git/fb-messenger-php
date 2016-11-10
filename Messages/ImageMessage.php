@@ -1,12 +1,12 @@
 <?php
 
-namespace pimax\Messages;
+namespace meritocracy\Messages;
 
 
 /**
  * Class ImageMessage
  *
- * @package pimax\Messages
+ * @package meritocracy\Messages
  */
 class ImageMessage extends Message
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace pimax\Messages;
+namespace meritocracy\Messages;
 
 /**
  * Class StructuredMessage
  *
- * @package pimax\Messages
+ * @package meritocracy\Messages
  */
 class StructuredMessage extends Message
 {
@@ -18,6 +18,12 @@ class StructuredMessage extends Message
      * Structured message generic type
      */
     const TYPE_GENERIC = "generic";
+
+    /**
+     * Structured message list type
+     */
+    const TYPE_LIST = "list";
+
 
     /**
      * Structured message receipt type

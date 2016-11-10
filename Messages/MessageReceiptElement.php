@@ -1,12 +1,12 @@
 <?php
 
-namespace pimax\Messages;
+namespace meritocracy\Messages;
 
 
 /**
  * Class MessageReceiptElement
  *
- * @package pimax\Messages
+ * @package meritocracy\Messages
  */
 class MessageReceiptElement extends MessageElement
 {

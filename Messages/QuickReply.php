@@ -1,10 +1,10 @@
 <?php
 
-namespace pimax\Messages;
+namespace meritocracy\Messages;
 /**
  * Class QuickReply
  *
- * @package pimax\Messages
+ * @package meritocracy\Messages
  */
 class QuickReply extends Message{
     /**

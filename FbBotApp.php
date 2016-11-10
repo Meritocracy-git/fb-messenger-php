@@ -1,10 +1,10 @@
 <?php
 
-namespace pimax;
+namespace meritocracy;
 
 use GuzzleHttp\Client;
-use pimax\Messages\Message;
-use pimax\Messages\MessageButton;
+use meritocracy\Messages\Message;
+use meritocracy\Messages\MessageButton;
 
 class FbBotApp
 {
