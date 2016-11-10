@@ -55,6 +55,8 @@ class StructuredMessage extends Message
      */
     protected $buttons = [];
 
+    protected $viewMoreButton = null;
+
     /**
      * @var null|string
      */
@@ -105,26 +107,27 @@ class StructuredMessage extends Message
      *
      * @param string $recipient
      * @param string $type
-     * @param array  $data
+     * @param array $data
      */
-    public function __construct($recipient, $type, $data)
+    public function __construct($recipient, $type, $data = null)
     {
         $this->recipient = $recipient;
         $this->type = $type;
 
-        switch ($type)
-        {
+        switch ($type) {
             case self::TYPE_BUTTON:
                 $this->title = $data['text'];
                 $this->buttons = $data['buttons'];
-            break;
+                break;
 
             case self::TYPE_GENERIC:
                 $this->elements = $data['elements'];
-            break;
+                break;
 
             case self::TYPE_LIST:
-                $this->elements = $data['elements'];
+                if (isset($data['elements'])) {
+                    $this->elements = $data['elements'];
+                }
                 break;
 
             case self::TYPE_RECEIPT:
@@ -138,7 +141,7 @@ class StructuredMessage extends Message
                 $this->address = $data['address'];
                 $this->summary = $data['summary'];
                 $this->adjustments = $data['adjustments'];
-            break;
+                break;
         }
     }
 
@@ -158,8 +161,7 @@ class StructuredMessage extends Message
             ]
         ];
 
-        switch ($this->type)
-        {
+        switch ($this->type) {
             case self::TYPE_BUTTON:
                 $result['attachment']['payload']['text'] = $this->title;
                 $result['attachment']['payload']['buttons'] = [];
@@ -168,16 +170,28 @@ class StructuredMessage extends Message
                     $result['attachment']['payload']['buttons'][] = $btn->getData();
                 }
 
-            break;
+                break;
 
             case self::TYPE_GENERIC:
             case self::TYPE_LIST:
                 $result['attachment']['payload']['elements'] = [];
 
                 foreach ($this->elements as $btn) {
-                    $result['attachment']['payload']['elements'][] = $btn->getData();
+
+                    if (!is_array($btn)) {
+                        $result['attachment']['payload']['elements'][] = $btn->getData();
+
+                    } else {
+                        $result['attachment']['payload']['elements'][] = $btn;
+
+                    }
                 }
-            break;
+
+                if ($this->viewMoreButton != null) {
+                    $result['attachment']['payload']['buttons'][] = $this->viewMoreButton->getData();
+                }
+
+                break;
 
             case self::TYPE_RECEIPT:
                 $result['attachment']['payload']['recipient_name'] = $this->recipient_name;
@@ -199,14 +213,37 @@ class StructuredMessage extends Message
                 foreach ($this->adjustments as $btn) {
                     $result['attachment']['payload']['adjustments'][] = $btn->getData();
                 }
-            break;
+                break;
         }
 
         return [
-            'recipient' =>  [
+            'recipient' => [
                 'id' => $this->recipient
             ],
             'message' => $result
         ];
     }
+
+    /**
+     * @return null
+     */
+    public function getViewMoreButton()
+    {
+        return $this->viewMoreButton;
+    }
+
+    /**
+     * @param null $viewMoreButton
+     */
+    public function setViewMoreButton($viewMoreButton)
+    {
+        $this->viewMoreButton = $viewMoreButton;
+    }
+
+    public function addElement($element)
+    {
+        $this->elements[] = $element->getData();
+    }
+
+
 }

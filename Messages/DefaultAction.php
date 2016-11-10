@@ -25,13 +25,13 @@ class DefaultAction
      *
      * @param array $data
      */
-    public function __construct($url, $type="web_url",  $fallbackUrl = null, $messengerExtensions = true, $webviewHeightRatio = "tall")
+    public function __construct($url, $type = "web_url", $fallbackUrl = null, $messengerExtensions = false, $webviewHeightRatio = "tall")
     {
         $this->type = $type;
-        $this->url=$url;
-        $this->fallbackUrl=$fallbackUrl;
-        $this->messengerExtensions=$messengerExtensions;
-        $this->webViewHeightRatio=$webviewHeightRatio;
+        $this->url = $url;
+        $this->fallbackUrl = $fallbackUrl;
+        $this->messengerExtensions = $messengerExtensions;
+        $this->webViewHeightRatio = $webviewHeightRatio;
     }
 
     /**
@@ -41,13 +41,17 @@ class DefaultAction
      */
     public function getData()
     {
-        return [
-            "type"=>$this->type,
-            "url"=>$this->url,
-            "fallback_url"=>$this->fallbackUrl,
-            "messenger_extensions"=>$this->messengerExtensions,
-            "webview_height_ratio"=>$this->webViewHeightRatio
+
+        $data = [
+            "type" => $this->type,
+            "url" => $this->url,
         ];
+        if ($this->fallbackUrl!=null) {
+            $data['fallback_url'] = $this->fallbackUrl;
+
+        }
+
+        return $data;
     }
 
 
