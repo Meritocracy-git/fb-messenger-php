@@ -139,6 +139,6 @@ class FbBotApp
         $response = $client->request($method, $this->apiUrl . $url, ["form_params" => $data, "headers" => $headers]);
 
 
-        return json_decode($response->getContent()->getBody(), true);
+        return json_decode($response->getBody()->getContents(), true);
     }
 }
